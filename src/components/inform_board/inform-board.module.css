@@ -1,0 +1,15 @@
+.infoBoard{
+	position: relative;
+	font-size: 22px;
+	padding: 5px;
+	margin-bottom: 0px;
+}
+
+.btn{
+	position: absolute;
+  left: 227px;
+	top: 25px;
+	width: 40px;
+	height: 40px;
+	font-size: 25px;
+}

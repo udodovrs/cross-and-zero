@@ -1,0 +1,22 @@
+.playBoard{
+	width: 266px;
+	display: flex;
+	flex-wrap: wrap;
+	background-color: rgb(71, 71, 71);
+	padding: 2px;
+}
+
+.playBox{
+	width: 80px;
+	height: 80px;
+	border: 3px solid black;
+	margin: 2px;
+	background-color: rgb(216, 216, 216);
+	transition: all 0.3s;
+	font-size: 55px;
+	text-align: center;
+}
+
+.playBox:hover{
+	background-color: rgb(238, 237, 237);
+}
