@@ -13,20 +13,23 @@ const arrWin = () => [
 
 export const getWinner = (setWinner, setIsGameOver, setIsWhoMove) => {
 	const draw = store.getState().filter(({ show }) => show === '');
-	
+	let isGameOver = true;
+
 	arrWin().forEach((item) => {
 		if (item === 3) {
 			setWinner('Победили крестики');
 			setIsGameOver(true);
 			setIsWhoMove(null);
+			isGameOver = false;
 		} else if (item === -3) {
 			setWinner('Победили нолики');
 			setIsGameOver(true);
 			setIsWhoMove(null);
+			isGameOver = false;
 		}
 	});
 
-	  if (draw.length === 0) {
+	if (draw.length === 0 && isGameOver) {
 		setWinner('Ничья');
 		setIsGameOver(true);
 		setIsWhoMove(null);

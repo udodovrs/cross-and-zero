@@ -18,7 +18,6 @@ export const InaormBoard = ({
 		setIsCross(true);
 		store.dispatch({ type: 'reset' });
 		setIsUpdate(!isUpdate);
-		console.log(store.getState());
 	};
 
 	return (
