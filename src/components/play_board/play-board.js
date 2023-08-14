@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import style from './play_board.module.css';
 import { store } from '../../store';
 import { getWinner } from '../../utilits';
+import { useDispatch } from 'react-redux';
 
 export const PlayBoard = ({
 	setIsWhoMove,
@@ -10,12 +10,8 @@ export const PlayBoard = ({
 	setIsGameOver,
 	isCross,
 	setIsCross,
-	isUpdate,
-	setIsUpdate,
 }) => {
-	useEffect(() => {
-		store.getState();
-	}, [isUpdate]);
+	const dispatch = useDispatch();
 
 	const handleClick = (payload) => {
 		if (isGameOver) {
@@ -25,15 +21,13 @@ export const PlayBoard = ({
 		const valuePlayBox = store.getState()[payload].show;
 
 		if (valuePlayBox === '' && isCross) {
-			store.dispatch({ type: 'cross', payload });
+			dispatch({ type: 'cross', payload });
 			setIsCross(false);
-			setIsUpdate(!isUpdate);
 			setIsWhoMove('Ходят нолики');
 			getWinner(setWinner, setIsGameOver, setIsWhoMove);
 		} else if (valuePlayBox === '' && !isCross) {
-			store.dispatch({ type: 'zero', payload });
+			dispatch({ type: 'zero', payload });
 			setIsCross(true);
-			setIsUpdate(!isUpdate);
 			setIsWhoMove('Ходят крестики');
 			getWinner(setWinner, setIsGameOver, setIsWhoMove);
 		}

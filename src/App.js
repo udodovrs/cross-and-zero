@@ -8,7 +8,6 @@ export const App = () => {
 	const [winner, setWinner] = useState(null);
 	const [isGameOver, setIsGameOver] = useState(false);
 	const [isCross, setIsCross] = useState(true);
-	const [isUpdate, setIsUpdate] = useState(false);
 
 	return (
 		<div className="wrapper">
@@ -19,9 +18,7 @@ export const App = () => {
 				setWinner={setWinner}
 				setIsGameOver={setIsGameOver}
 				setIsCross={setIsCross}
-				setIsUpdate={setIsUpdate}
-				isUpdate={isUpdate}
-				 />
+			/>
 			<PlayBoard
 				setIsWhoMove={setIsWhoMove}
 				setWinner={setWinner}
@@ -29,8 +26,6 @@ export const App = () => {
 				setIsGameOver={setIsGameOver}
 				isCross={isCross}
 				setIsCross={setIsCross}
-				isUpdate={isUpdate}
-				setIsUpdate={setIsUpdate}
 			/>
 		</div>
 	);
