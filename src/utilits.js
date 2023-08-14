@@ -1,37 +1,36 @@
 import { store } from './store';
 
-const arrWin = () => [
-	store.getState()[0].value + store.getState()[1].value + store.getState()[2].value,
-	store.getState()[3].value + store.getState()[4].value + store.getState()[5].value,
-	store.getState()[6].value + store.getState()[7].value + store.getState()[8].value,
-	store.getState()[0].value + store.getState()[3].value + store.getState()[6].value,
-	store.getState()[1].value + store.getState()[4].value + store.getState()[7].value,
-	store.getState()[2].value + store.getState()[5].value + store.getState()[8].value,
-	store.getState()[0].value + store.getState()[4].value + store.getState()[8].value,
-	store.getState()[2].value + store.getState()[4].value + store.getState()[6].value,
-];
+export const getWinner = () => {
+	const arr = store.getState().playBoardState;
 
-export const getWinner = (setWinner, setIsGameOver, setIsWhoMove) => {
-	const draw = store.getState().filter(({ show }) => show === '');
+	const arrWin = () => [
+		arr[0].value + arr[1].value + arr[2].value,
+		arr[3].value + arr[4].value + arr[5].value,
+		arr[6].value + arr[7].value + arr[8].value,
+		arr[0].value + arr[3].value + arr[6].value,
+		arr[1].value + arr[4].value + arr[7].value,
+		arr[2].value + arr[5].value + arr[8].value,
+		arr[0].value + arr[4].value + arr[8].value,
+		arr[2].value + arr[4].value + arr[6].value,
+	];
+
+	const draw = arr.filter(({ show }) => show === '');
 	let isGameOver = true;
+	let result = null;
 
 	arrWin().forEach((item) => {
 		if (item === 3) {
-			setWinner('Победили крестики');
-			setIsGameOver(true);
-			setIsWhoMove(null);
+			result = 'X';
 			isGameOver = false;
 		} else if (item === -3) {
-			setWinner('Победили нолики');
-			setIsGameOver(true);
-			setIsWhoMove(null);
+			result = '0';
 			isGameOver = false;
 		}
 	});
 
 	if (draw.length === 0 && isGameOver) {
-		setWinner('Ничья');
-		setIsGameOver(true);
-		setIsWhoMove(null);
+		result = 'ничья';
 	}
+
+	return result;
 };

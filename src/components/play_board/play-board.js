@@ -1,41 +1,48 @@
 import style from './play_board.module.css';
-import { store } from '../../store';
 import { getWinner } from '../../utilits';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const PlayBoard = ({
-	setIsWhoMove,
-	setWinner,
-	isGameOver,
-	setIsGameOver,
-	isCross,
-	setIsCross,
-}) => {
+export const PlayBoard = () => {
 	const dispatch = useDispatch();
 
+	const stateArr = useSelector((state) => state.playBoardState);
+	const cross = useSelector((state) => state.useStateState.isCross);
+	const gameOver = useSelector((state) => state.useStateState.gameOver);
+
 	const handleClick = (payload) => {
-		if (isGameOver) {
+		if (gameOver) {
 			return;
 		}
+		const valuePlayBox = stateArr[payload].show;
 
-		const valuePlayBox = store.getState()[payload].show;
-
-		if (valuePlayBox === '' && isCross) {
+		if (valuePlayBox === '' && cross) {
 			dispatch({ type: 'cross', payload });
-			setIsCross(false);
-			setIsWhoMove('Ходят нолики');
-			getWinner(setWinner, setIsGameOver, setIsWhoMove);
-		} else if (valuePlayBox === '' && !isCross) {
+			dispatch({ type: 'isCross', payload: false });
+			dispatch({ type: 'whoMove', payload: 'Ходят нолики' });
+		} else if (valuePlayBox === '' && !cross) {
 			dispatch({ type: 'zero', payload });
-			setIsCross(true);
-			setIsWhoMove('Ходят крестики');
-			getWinner(setWinner, setIsGameOver, setIsWhoMove);
+			dispatch({ type: 'isCross', payload: true });
+			dispatch({ type: 'whoMove', payload: 'Ходят крестики' });
+		}
+
+		if (getWinner() === 'X') {
+			dispatch({ type: 'winner', payload: 'Победиди крестики' });
+			dispatch({ type: 'gameOver', payload: true });
+			dispatch({ type: 'whoMove', payload: null });
+		} else if (getWinner() === '0') {
+			dispatch({ type: 'winner', payload: 'Победиди нолики' });
+			dispatch({ type: 'gameOver', payload: true });
+			dispatch({ type: 'whoMove', payload: null });
+		} else if (getWinner() === 'ничья') {
+			dispatch({ type: 'winner', payload: 'Ничья' });
+			dispatch({ type: 'gameOver', payload: true });
+			dispatch({ type: 'whoMove', payload: null });
 		}
 	};
 
 	return (
 		<div className={style.playBoard}>
-			{store.getState().map((item, index) => (
+			{stateArr.map((item, index) => (
 				<div
 					className={style.playBox}
 					key={index}

@@ -1,29 +1,16 @@
 import style from './inform-board.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const InaormBoard = ({
-	isWhoMove,
-	winner,
-	setIsWhoMove,
-	setWinner,
-	setIsGameOver,
-	setIsCross,
-}) => {
+export const InformBoard = () => {
 	const dispatch = useDispatch();
-
-	const handleReset = () => {
-		setIsWhoMove('Ходят крестики');
-		setWinner(null);
-		setIsGameOver(false);
-		setIsCross(true);
-		dispatch({ type: 'reset' });
-	};
+	const whoMove = useSelector((state) => state.useStateState.whoMove);
+	const winner = useSelector((state) => state.useStateState.winner);
 
 	return (
 		<div className={style.infoBoard}>
-			<p>{isWhoMove}</p>
+			<p>{whoMove}</p>
 			<p>{winner}</p>
-			<button className={style.btn} onClick={handleReset}>
+			<button className={style.btn} onClick={()=> dispatch({ type: 'reset' })}>
 				⟲
 			</button>
 		</div>
