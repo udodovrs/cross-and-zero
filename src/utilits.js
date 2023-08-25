@@ -3,7 +3,7 @@ import { store } from './store';
 export const getWinner = () => {
 	const arr = store.getState().playBoardState;
 
-	const arrWin = () => [
+	const arrWin =  [
 		arr[0].value + arr[1].value + arr[2].value,
 		arr[3].value + arr[4].value + arr[5].value,
 		arr[6].value + arr[7].value + arr[8].value,
@@ -18,7 +18,7 @@ export const getWinner = () => {
 	let isGameOver = true;
 	let result = null;
 
-	arrWin().forEach((item) => {
+	arrWin.forEach((item) => {
 		if (item === 3) {
 			result = 'X';
 			isGameOver = false;

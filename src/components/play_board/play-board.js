@@ -26,11 +26,11 @@ export const PlayBoard = () => {
 		}
 
 		if (getWinner() === 'X') {
-			dispatch({ type: 'winner', payload: 'Победиди крестики' });
+			dispatch({ type: 'winner', payload: 'Победили крестики' });
 			dispatch({ type: 'gameOver', payload: true });
 			dispatch({ type: 'whoMove', payload: null });
 		} else if (getWinner() === '0') {
-			dispatch({ type: 'winner', payload: 'Победиди нолики' });
+			dispatch({ type: 'winner', payload: 'Победили нолики' });
 			dispatch({ type: 'gameOver', payload: true });
 			dispatch({ type: 'whoMove', payload: null });
 		} else if (getWinner() === 'ничья') {
